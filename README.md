@@ -1,3 +1,3 @@
 # diplom-terraform
 
-Тест
+Тест2
