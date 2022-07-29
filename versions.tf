@@ -6,6 +6,8 @@ terraform {
     }
   }
 
+
+
   backend "s3" {
     endpoint   = "storage.yandexcloud.net"
     bucket     = "tfdiplom"
