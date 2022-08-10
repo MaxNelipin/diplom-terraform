@@ -20,3 +20,44 @@ resource "yandex_resourcemanager_folder_iam_binding" "images-puller" {
    "serviceAccount:${yandex_iam_service_account.kube-admin.id}"
  ]
 }
+
+resource "yandex_iam_service_account" "ingress-admin" {
+ name        = "ingress-admin"
+ description = "админ ингресс"
+}
+
+resource "yandex_resourcemanager_folder_iam_binding" "alb-editor" {
+ # Сервисному аккаунту назначается роль "alb.editor".
+ folder_id = local.folder_id
+ role      = "alb.editor"
+ members   = [
+   "serviceAccount:${yandex_iam_service_account.ingress-admin.id}"
+ ]
+}
+
+resource "yandex_resourcemanager_folder_iam_binding" "vpc-publicAdmin" {
+ # Сервисному аккаунту назначается роль "vpc.publicAdmin".
+ folder_id = local.folder_id
+ role      = "vpc.publicAdmin"
+ members   = [
+   "serviceAccount:${yandex_iam_service_account.ingress-admin.id}"
+ ]
+}
+
+resource "yandex_resourcemanager_folder_iam_binding" "compute-viewer" {
+ # Сервисному аккаунту назначается роль "compute.viewer".
+ folder_id = local.folder_id
+ role      = "compute.viewer"
+ members   = [
+   "serviceAccount:${yandex_iam_service_account.ingress-admin.id}"
+ ]
+}
+
+resource "yandex_resourcemanager_folder_iam_binding" "certificate-manager-certificates-downloader" {
+ # Сервисному аккаунту назначается роль "certificate-manager.certificates.downloader".
+ folder_id = local.folder_id
+ role      = "certificate-manager.certificates.downloader"
+ members   = [
+   "serviceAccount:${yandex_iam_service_account.ingress-admin.id}"
+ ]
+}
