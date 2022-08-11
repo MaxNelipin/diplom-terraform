@@ -88,7 +88,7 @@ resource "yandex_kubernetes_node_group" "node-diplom-a" {
     metadata = { ssh-keys = "maxn:${file(var.ssh-keys)}" }
 
     resources {
-      memory = 2
+      memory = 4
       cores  = 2
       core_fraction = 20
     }
