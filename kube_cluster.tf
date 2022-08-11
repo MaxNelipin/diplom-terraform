@@ -88,7 +88,7 @@ resource "yandex_kubernetes_node_group" "node-diplom-a" {
     metadata = { ssh-keys = "maxn:${file(var.ssh-keys)}" }
 
     resources {
-      memory = 4
+      memory = 6
       cores  = 2
       core_fraction = 20
     }
@@ -161,7 +161,7 @@ resource "yandex_kubernetes_node_group" "node-diplom-b" {
     metadata = { ssh-keys = "maxn:${file(var.ssh-keys)}" }
 
     resources {
-      memory = 2
+      memory = 6
       cores  = 2
       core_fraction = 20
     }
@@ -235,7 +235,7 @@ resource "yandex_kubernetes_node_group" "node-diplom-c" {
     metadata = { ssh-keys = "maxn:${file(var.ssh-keys)}" }
 
     resources {
-      memory = 2
+      memory = 6
       cores  = 2
       core_fraction = 20
     }
