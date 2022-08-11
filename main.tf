@@ -6,18 +6,6 @@ provider "yandex" {
 }
 
 locals {
-  platform_type_map = {
-    stage = "standard-v1"
-    prod = "standard-v3"
-  }
-  instance_count_map = {
-    stage = 1
-    prod = 2
-  }
-  instances = {
-
-  }
-
   folder_id = "b1gcetfa5k75tcn9b9lr"
 }
 
