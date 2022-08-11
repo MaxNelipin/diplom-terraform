@@ -1,6 +1,6 @@
 resource "yandex_kubernetes_cluster" "cluster-kube" {
-  name        = "cluster-kube-15-4"
-  description = "description"
+  name        = "cluster-kube"
+  description = "Кластер для диплома"
 
   network_id = yandex_vpc_network.network-diplom.id
 
@@ -62,14 +62,15 @@ resource "yandex_kubernetes_cluster" "cluster-kube" {
   depends_on              = [
     yandex_resourcemanager_folder_iam_binding.editor_netology-kube,
     yandex_resourcemanager_folder_iam_binding.images-puller,
+    yandex_resourcemanager_folder_iam_binding.load-balancer-admin,
     yandex_iam_service_account.kube-admin
   ]
 
 }
 
-resource "yandex_kubernetes_node_group" "node-group-15-4-a" {
+resource "yandex_kubernetes_node_group" "node-diplom-a" {
   cluster_id = yandex_kubernetes_cluster.cluster-kube.id
-  name       = "node-group-15-4-a"
+  name       = "node-diplom-a"
 
   version = "1.20"
 
@@ -98,18 +99,18 @@ resource "yandex_kubernetes_node_group" "node-group-15-4-a" {
     }
 
     scheduling_policy {
-      preemptible = true
+      preemptible = false
     }
 
     container_runtime {
-      type = "containerd"
+      type = "docker"
     }
   }
 
   scale_policy {
     auto_scale {
       initial = 1
-      max     = 1
+      max     = 2
       min     = 1
     }
   }
@@ -123,7 +124,7 @@ resource "yandex_kubernetes_node_group" "node-group-15-4-a" {
   }
 
   maintenance_policy {
-    auto_upgrade = true
+    auto_upgrade = false
     auto_repair  = true
 
     maintenance_window {
@@ -140,9 +141,9 @@ resource "yandex_kubernetes_node_group" "node-group-15-4-a" {
   }
 }
 
-resource "yandex_kubernetes_node_group" "node-group-15-4-b" {
+resource "yandex_kubernetes_node_group" "node-diplom-b" {
   cluster_id = yandex_kubernetes_cluster.cluster-kube.id
-  name       = "node-group-15-4-b"
+  name       = "node-diplom-b"
 
   version = "1.20"
 
@@ -171,18 +172,18 @@ resource "yandex_kubernetes_node_group" "node-group-15-4-b" {
     }
 
     scheduling_policy {
-      preemptible = true
+      preemptible = false
     }
 
     container_runtime {
-      type = "containerd"
+      type = "docker"
     }
   }
 
   scale_policy {
     auto_scale {
       initial = 1
-      max     = 1
+      max     = 2
       min     = 1
     }
   }
@@ -196,7 +197,7 @@ resource "yandex_kubernetes_node_group" "node-group-15-4-b" {
   }
 
   maintenance_policy {
-    auto_upgrade = true
+    auto_upgrade = false
     auto_repair  = true
 
     maintenance_window {
@@ -214,9 +215,9 @@ resource "yandex_kubernetes_node_group" "node-group-15-4-b" {
 }
 
 
-resource "yandex_kubernetes_node_group" "node-group-15-4-c" {
+resource "yandex_kubernetes_node_group" "node-diplom-c" {
   cluster_id = yandex_kubernetes_cluster.cluster-kube.id
-  name       = "node-group-15-4-c"
+  name       = "node-diplom-c"
 
   version = "1.20"
 
@@ -245,18 +246,18 @@ resource "yandex_kubernetes_node_group" "node-group-15-4-c" {
     }
 
     scheduling_policy {
-      preemptible = true
+      preemptible = false
     }
 
     container_runtime {
-      type = "containerd"
+      type = "docker"
     }
   }
 
   scale_policy {
     auto_scale {
       initial = 1
-      max     = 1
+      max     = 2
       min     = 1
     }
   }
@@ -270,7 +271,7 @@ resource "yandex_kubernetes_node_group" "node-group-15-4-c" {
   }
 
   maintenance_policy {
-    auto_upgrade = true
+    auto_upgrade = false
     auto_repair  = true
 
     maintenance_window {

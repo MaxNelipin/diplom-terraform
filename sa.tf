@@ -21,6 +21,15 @@ resource "yandex_resourcemanager_folder_iam_binding" "images-puller" {
  ]
 }
 
+resource "yandex_resourcemanager_folder_iam_binding" "load-balancer-admin" {
+ # Сервисному аккаунту назначается роль "load-balancer.admin".
+ folder_id = local.folder_id
+ role      = "load-balancer.admin"
+ members   = [
+   "serviceAccount:${yandex_iam_service_account.kube-admin.id}"
+ ]
+}
+
 resource "yandex_iam_service_account" "ingress-admin" {
  name        = "ingress-admin"
  description = "админ ингресс"
